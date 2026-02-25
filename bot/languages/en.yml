@@ -5,6 +5,11 @@ common:
   start: "Hello, I'm a modular Telegram bot!"
   help: "Help message in English."
 
+github:
+  no_args: "Please provide a GitHub username. Example: `/git torvalds`"
+  not_found: "GitHub user not found."
+  error: "An error occurred while fetching GitHub user data."
+
 errors:
   unknown: "An unknown error occurred."
   not_found: "Not found."
