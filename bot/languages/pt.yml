@@ -1,0 +1,10 @@
+# Strings em Português
+# Use a notação de ponto para strings aninhadas (ex: 'common.start')
+
+common:
+  start: "Olá, sou um bot modular do Telegram!"
+  help: "Mensagem de ajuda em português."
+
+errors:
+  unknown: "Ocorreu um erro desconhecido."
+  not_found: "Não encontrado."

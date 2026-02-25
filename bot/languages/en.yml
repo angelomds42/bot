@@ -1,0 +1,10 @@
+# English language strings
+# Use dot-notation for nested strings (e.g., 'common.start')
+
+common:
+  start: "Hello, I'm a modular Telegram bot!"
+  help: "Help message in English."
+
+errors:
+  unknown: "An unknown error occurred."
+  not_found: "Not found."
