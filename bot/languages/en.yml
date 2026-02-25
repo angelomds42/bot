@@ -9,6 +9,12 @@ github:
   no_args: "Please provide a GitHub username. Example: `/git torvalds`"
   not_found: "GitHub user not found."
   error: "An error occurred while fetching GitHub user data."
+  name: "Name"
+  user_info: "User infos"
+  username: "Username"
+  location: "Location"
+  public_repos: "Public Repositories"
+  followers: "Followers"
 
 errors:
   unknown: "An unknown error occurred."
