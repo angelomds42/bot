@@ -1,5 +1,6 @@
 from telegram import InlineKeyboardButton
 from typing import Dict, List
+from bot.utils.language import get_msg_string
 
 HELP_MODULES: Dict[str, str] = {}
 
@@ -23,3 +24,12 @@ def get_help_keyboard(
 
 def get_module_help(module_name: str):
     return HELP_MODULES.get(module_name)
+
+
+def get_string_helper(update):
+    """Returns a shorthand string getter bound to the update's language."""
+
+    def s(key, **kwargs):
+        return get_msg_string(update, key, **kwargs)
+
+    return s
