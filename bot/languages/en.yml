@@ -1,21 +1,31 @@
-# English language strings
-# Use dot-notation for nested strings (e.g., 'common.start')
-
+# English strings
 common:
-  start: "Hello, I'm a modular Telegram bot!"
-  help: "Help message in English."
+  start: 'Welcome to NoNameBot\! A modular Telegram bot\.'
+  help: 'Select a module below to see its help information\:'
+  back: "« Back"
+  btn_help: "Help"
+
+basics:
+  help: |
+    Basics Module\:
+    /start \- Start the bot
+    /help \- Show this menu
+    /info \- Show your info
 
 github:
-  no_args: "Please provide a GitHub username. Example: `/git torvalds`"
-  not_found: "GitHub user not found."
-  error: "An error occurred while fetching GitHub user data."
+  help: |
+    GitHub Module\:
+    Use `/github \<username\>` to get information about a GitHub user\.
+  no_args: 'Please provide a GitHub username\. Example\: `/github torvalds`'
+  not_found: 'GitHub user not found\.'
+  error: 'An error occurred while fetching GitHub user data\.'
+  user_info: "User Information"
   name: "Name"
-  user_info: "User infos"
   username: "Username"
   location: "Location"
-  public_repos: "Public Repositories"
+  public_repos: "Public Repos"
   followers: "Followers"
 
 errors:
-  unknown: "An unknown error occurred."
-  not_found: "Not found."
+  unknown: 'An unknown error occurred\.'
+  not_found: 'Not found\.'

@@ -1,31 +1,66 @@
-from telegram import Update, constants, helpers
-from telegram.ext import ContextTypes, CommandHandler
+from telegram import Update, constants, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import ContextTypes, CommandHandler, CallbackQueryHandler
 from bot.utils.language import get_msg_string
+from bot.utils.help import get_help_keyboard, get_module_help, register_module_help
+
+
+async def send_menu(update: Update, text_key: str, keyboard: list):
+    """Helper to send or edit messages with keyboards."""
+    text = get_msg_string(update, text_key)
+    markup = InlineKeyboardMarkup(keyboard)
+
+    if update.callback_query:
+        await update.callback_query.edit_message_text(
+            text, reply_markup=markup, parse_mode=constants.ParseMode.MARKDOWN_V2
+        )
+    else:
+        await update.message.reply_text(
+            text, reply_markup=markup, parse_mode=constants.ParseMode.MARKDOWN_V2
+        )
+
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    text = get_msg_string(update, "common.start")
-    safe_text = helpers.escape_markdown(text, version=2)
-    await update.message.reply_text(safe_text, parse_mode=constants.ParseMode.MARKDOWN_V2)
+    keyboard = [
+        [
+            InlineKeyboardButton(
+                get_msg_string(update, "common.btn_help"), callback_data="help_main"
+            )
+        ]
+    ]
+    await send_menu(update, "common.start", keyboard)
 
-async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    text = get_msg_string(update, "common.help")
-    safe_text = helpers.escape_markdown(text, version=2)
-    await update.message.reply_text(safe_text, parse_mode=constants.ParseMode.MARKDOWN_V2)
 
-async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user = update.effective_user
-    name = helpers.escape_markdown(user.first_name, version=2)
-    uid = helpers.escape_markdown(str(user.id), version=2)
-    lang = helpers.escape_markdown(user.language_code or "N/A", version=2)
-    
-    message = (
-        f"*User:* {name}\n"
-        f"*ID:* `{uid}`\n"
-        f"*Lang:* `{lang}`"
-    )
-    await update.message.reply_text(message, parse_mode=constants.ParseMode.MARKDOWN_V2)
+async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+    data = query.data
+
+    if data == "start_main":
+        await start(update, context)
+    elif data == "help_main":
+        await send_menu(update, "common.help", get_help_keyboard())
+    elif data.startswith("help_mod_"):
+        mod_name = data.replace("help_mod_", "")
+        help_key = get_module_help(mod_name)
+        if help_key:
+            keyboard = [
+                [
+                    InlineKeyboardButton(
+                        get_msg_string(update, "common.back"), callback_data="help_main"
+                    )
+                ]
+            ]
+            await send_menu(update, help_key, keyboard)
+
 
 def __init_module__(application):
     application.add_handler(CommandHandler("start", start))
-    application.add_handler(CommandHandler("help", help_command))
-    application.add_handler(CommandHandler("info", info))
+    application.add_handler(
+        CommandHandler(
+            "help", lambda u, c: send_menu(u, "common.help", get_help_keyboard())
+        )
+    )
+    application.add_handler(
+        CallbackQueryHandler(menu_handler, pattern="^(help_|start_)")
+    )
+    register_module_help("Basics", "basics.help")

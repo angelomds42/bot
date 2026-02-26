@@ -1,5 +1,6 @@
 from telegram import Update
 from telegram.ext import ContextTypes, CommandHandler
+from bot.utils.help import register_module_help
 from bot.utils.language import get_msg_string
 from github import Github
 from github.GithubException import UnknownObjectException, GithubException
@@ -62,3 +63,4 @@ async def github(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 def __init_module__(application):
     application.add_handler(CommandHandler("github", github))
+    register_module_help("GitHub", "github.help")
