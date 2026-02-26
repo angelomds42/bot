@@ -180,7 +180,45 @@ async def ban(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
 
+async def unban(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    s, e = get_string_helper(update)
+
+    user_id, display_name, ok = await _check_common(
+        update, context, s, "unban", check_admin_target=False
+    )
+    if not ok:
+        return
+
+    member = await _get_member(update.effective_chat, user_id)
+    if await _guard(
+        update,
+        s,
+        not member or member.status != ChatMember.BANNED,
+        "moderation.unban_not_banned",
+    ):
+        return
+
+    reason_start = 1 if context.args and not update.message.reply_to_message else 0
+    reason = " ".join(context.args[reason_start:]) if context.args else None
+
+    try:
+        await update.effective_chat.unban_member(user_id)
+
+        text = s("moderation.unban_success", username=e(display_name))
+        if reason:
+            text += f"\n{s('moderation.restriction_reason', reason=e(reason))}"
+
+        await update.message.reply_text(
+            text, parse_mode=constants.ParseMode.MARKDOWN_V2
+        )
+    except TelegramError:
+        await update.message.reply_text(
+            s("moderation.unban_error"), parse_mode=constants.ParseMode.MARKDOWN_V2
+        )
+
+
 def __init_module__(application):
     application.add_handler(CommandHandler("kick", kick))
     application.add_handler(CommandHandler("ban", ban))
+    application.add_handler(CommandHandler("unban", unban))
     register_module_help("Moderation", "moderation.help")

@@ -40,6 +40,10 @@ moderation:
   ban_error: 'Falha ao banir o usuário\.'
   ban_self: 'Você não pode se banir\.'
   ban_admin: 'Você não pode banir um admin\.'
+  unban_success: 'Usuário `{username}` foi desbanido\.'
+  unban_error: 'Falha ao desbanir o usuário\.'
+  unban_self: 'Você não pode se desbanir\.'
+  unban_not_banned: 'Este usuário não está banido\.'
   bot_no_permission: 'Preciso ser admin com permissão para restringir membros\.'
   no_target: 'Responda a uma mensagem, mencione um usuário ou forneça um ID\.'
   restriction_reason: 'Motivo\: {reason}'
@@ -48,3 +52,4 @@ moderation:
     Módulo de Moderação\:
     /kick \<usuário\> \[motivo\] \- Remove um usuário do grupo
     /ban \<usuário\> \[duração\] \[motivo\] \- Bane um usuário do grupo
+    /unban \<usuário\> \[motivo\] \- Desbane um usuário do grupo
