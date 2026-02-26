@@ -81,7 +81,7 @@ async def _guard(update, s, condition, key) -> bool:
 
 async def _check_common(update, context, s, action):
     if await _guard(
-        update, s, not await is_user_admin(update), f"moderation.{action}_not_admin"
+        update, s, not await is_user_admin(update), f"moderation.user_not_admin"
     ):
         return None, None, False
 
@@ -89,13 +89,13 @@ async def _check_common(update, context, s, action):
         update,
         s,
         not await bot_has_permission(update, "can_restrict_members"),
-        f"moderation.{action}_bot_no_permission",
+        f"moderation.bot_no_permission",
     ):
         return None, None, False
 
     user_id, display_name = await _resolve_target(update, context)
 
-    if await _guard(update, s, not user_id, f"moderation.{action}_no_target"):
+    if await _guard(update, s, not user_id, f"moderation.no_target"):
         return None, None, False
     if await _guard(
         update, s, user_id == update.effective_user.id, f"moderation.{action}_self"
@@ -130,7 +130,7 @@ async def kick(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         text = s("moderation.kick_success", username=e(display_name))
         if reason:
-            text += f"\n{s('moderation.kick_reason', reason=e(reason))}"
+            text += f"\n{s('moderation.restriction_reason', reason=e(reason))}"
 
         await update.message.reply_text(
             text, parse_mode=constants.ParseMode.MARKDOWN_V2
@@ -168,7 +168,7 @@ async def ban(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if duration_str:
             text += f"\n{s('moderation.ban_duration', duration=e(duration_str))}"
         if reason:
-            text += f"\n{s('moderation.ban_reason', reason=e(reason))}"
+            text += f"\n{s('moderation.restriction_reason', reason=e(reason))}"
 
         await update.message.reply_text(
             text, parse_mode=constants.ParseMode.MARKDOWN_V2
@@ -177,6 +177,7 @@ async def ban(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
             s("moderation.ban_error"), parse_mode=constants.ParseMode.MARKDOWN_V2
         )
+
 
 
 def __init_module__(application):
