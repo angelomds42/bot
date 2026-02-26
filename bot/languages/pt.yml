@@ -1,10 +1,31 @@
 # Strings em Português
-# Use a notação de ponto para strings aninhadas (ex: 'common.start')
-
 common:
-  start: "Olá, sou um bot modular do Telegram!"
-  help: "Mensagem de ajuda em português."
+  start: 'Bem\-vindo ao NoNameBot\! Um bot modular para Telegram\.'
+  help: 'Selecione um módulo abaixo para ver suas informações de ajuda\:'
+  back: "« Voltar"
+  btn_help: "Ajuda"
+
+basics:
+  help: |
+    Módulo Básico\:
+    /start \- Inicia o bot
+    /help \- Mostra este menu
+    /info \- Mostra suas informações
+
+github:
+  help: |
+    Módulo GitHub\:
+    Use `/github \<usuário\>` para obter informações sobre um usuário do GitHub\.
+  no_args: 'Por favor, forneça um nome de usuário do GitHub\. Exemplo\: `/github torvalds`'
+  not_found: 'Usuário do GitHub não encontrado\.'
+  error: 'Ocorreu um erro ao buscar dados do usuário no GitHub\.'
+  user_info: "Informações do Usuário"
+  name: "Nome"
+  username: "Usuário"
+  location: "Localização"
+  public_repos: "Repositórios"
+  followers: "Seguidores"
 
 errors:
-  unknown: "Ocorreu um erro desconhecido."
-  not_found: "Não encontrado."
+  unknown: 'Ocorreu um erro desconhecido\.'
+  not_found: 'Não encontrado\.'
