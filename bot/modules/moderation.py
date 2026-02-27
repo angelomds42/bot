@@ -123,6 +123,7 @@ async def _ban_common(
     delete_message=False,
     has_duration=True,
     kick=False,
+    unban=False,
 ):
     s, e = get_string_helper(update)
 
@@ -134,9 +135,23 @@ async def _ban_common(
             )
             return
 
-    user_id, display_name, ok = await _check_common(update, context, s, action)
+    check_admin = not unban
+    user_id, display_name, ok = await _check_common(
+        update, context, s, action, check_admin_target=check_admin
+    )
+
     if not ok:
         return
+
+    member = await _get_member(update.effective_chat, user_id)
+    if unban:
+        if await _guard(
+            update,
+            s,
+            not member or member.status != ChatMember.BANNED,
+            "moderation.unban_not_banned",
+        ):
+            return
 
     arg_offset = 0 if update.message.reply_to_message else 1
     until_date = None
@@ -152,8 +167,9 @@ async def _ban_common(
     reason = " ".join(context.args[arg_offset:]) if context.args else None
 
     try:
-        await update.effective_chat.ban_member(user_id, until_date=until_date)
-        if kick:
+        if not unban:
+            await update.effective_chat.ban_member(user_id, until_date=until_date)
+        if kick or unban:
             await update.effective_chat.unban_member(user_id)
         if delete_message and update.message.reply_to_message:
             await update.message.reply_to_message.delete()
@@ -250,40 +266,7 @@ async def dban(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def unban(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    s, e = get_string_helper(update)
-
-    user_id, display_name, ok = await _check_common(
-        update, context, s, "unban", check_admin_target=False
-    )
-    if not ok:
-        return
-
-    member = await _get_member(update.effective_chat, user_id)
-    if await _guard(
-        update,
-        s,
-        not member or member.status != ChatMember.BANNED,
-        "moderation.unban_not_banned",
-    ):
-        return
-
-    reason_start = 1 if context.args and not update.message.reply_to_message else 0
-    reason = " ".join(context.args[reason_start:]) if context.args else None
-
-    try:
-        await update.effective_chat.unban_member(user_id)
-
-        text = s("moderation.unban_success", username=e(display_name))
-        if reason:
-            text += f"\n{s('moderation.restriction_reason', reason=e(reason))}"
-
-        await update.message.reply_text(
-            text, parse_mode=constants.ParseMode.MARKDOWN_V2
-        )
-    except TelegramError:
-        await update.message.reply_text(
-            s("moderation.unban_error"), parse_mode=constants.ParseMode.MARKDOWN_V2
-        )
+    await _ban_common(update, context, "unban", unban=True, has_duration=False)
 
 
 async def mute(update: Update, context: ContextTypes.DEFAULT_TYPE):
