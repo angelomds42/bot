@@ -1,13 +1,11 @@
-from telegram import Update
-from telegram.ext import ContextTypes, MessageHandler, filters
+from telegram import Update, ChatMemberUpdated
+from telegram.ext import ContextTypes, MessageHandler, ChatMemberHandler, filters
 from bot.utils.db import get_db
 
 
-async def _save_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user = update.effective_user
+def _save_user_to_db(user):
     if not user or user.is_bot:
         return
-
     db = get_db()
     db.execute(
         """
@@ -22,6 +20,20 @@ async def _save_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
     db.commit()
 
 
+async def _save_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user = update.effective_user
+    if not user or user.is_bot:
+        return
+    _save_user_to_db(user)
+
+
+async def _save_chat_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    member_update: ChatMemberUpdated = update.chat_member
+    if not member_update:
+        return
+    _save_user_to_db(member_update.new_chat_member.user)
+
+
 def get_user_id(username: str) -> int | None:
     username = username.lstrip("@").lower()
     db = get_db()
@@ -33,3 +45,6 @@ def get_user_id(username: str) -> int | None:
 
 def __init_module__(application):
     application.add_handler(MessageHandler(filters.ALL, _save_user), group=1)
+    application.add_handler(
+        ChatMemberHandler(_save_chat_member, ChatMemberHandler.CHAT_MEMBER), group=1
+    )
