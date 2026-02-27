@@ -180,6 +180,51 @@ async def ban(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
 
+async def dban(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    s, e = get_string_helper(update)
+
+    if not update.message.reply_to_message:
+        await update.message.reply_text(
+            s("moderation.dban_no_reply"), parse_mode=constants.ParseMode.MARKDOWN_V2
+        )
+        return
+
+    user_id, display_name, ok = await _check_common(update, context, s, "ban")
+    if not ok:
+        return
+
+    arg_offset = 0
+    until_date = None
+    duration_str = None
+
+    if context.args and len(context.args) > arg_offset:
+        delta = _parse_duration(context.args[arg_offset])
+        if delta:
+            until_date = datetime.now(tz=timezone.utc) + delta
+            duration_str = context.args[arg_offset]
+            arg_offset += 1
+
+    reason = " ".join(context.args[arg_offset:]) if context.args else None
+
+    try:
+        await update.effective_chat.ban_member(user_id, until_date=until_date)
+        await update.message.reply_to_message.delete()
+
+        text = s("moderation.ban_success", username=e(display_name))
+        if duration_str:
+            text += f"\n{s('moderation.ban_duration', duration=e(duration_str))}"
+        if reason:
+            text += f"\n{s('moderation.restriction_reason', reason=e(reason))}"
+
+        await update.message.reply_text(
+            text, parse_mode=constants.ParseMode.MARKDOWN_V2
+        )
+    except TelegramError:
+        await update.message.reply_text(
+            s("moderation.ban_error"), parse_mode=constants.ParseMode.MARKDOWN_V2
+        )
+
+
 async def unban(update: Update, context: ContextTypes.DEFAULT_TYPE):
     s, e = get_string_helper(update)
 
@@ -312,6 +357,7 @@ async def unmute(update: Update, context: ContextTypes.DEFAULT_TYPE):
 def __init_module__(application):
     application.add_handler(CommandHandler("kick", kick))
     application.add_handler(CommandHandler("ban", ban))
+    application.add_handler(CommandHandler("dban", dban))
     application.add_handler(CommandHandler("unban", unban))
     application.add_handler(CommandHandler("mute", mute))
     application.add_handler(CommandHandler("unmute", unmute))

@@ -39,6 +39,7 @@ moderation:
   ban_error: 'Failed to ban\. Make sure I have the right permissions\.'
   ban_self: 'You cannot ban yourself\.'
   ban_admin: 'Cannot ban an admin\.'
+  reply_required: 'You need to reply to a message to use this command\.'
   unban_success: '`{username}` has been unbanned\.'
   unban_error: 'Failed to unban\. Make sure I have the right permissions\.'
   unban_self: 'You cannot unban yourself\.'

@@ -39,6 +39,7 @@ moderation:
   ban_error: 'Falha ao banir\. Verifique se tenho as permissões necessárias\.'
   ban_self: 'Não é possível banir você mesmo\.'
   ban_admin: 'Não é possível banir um admin\.'
+  reply_required: 'Você precisa responder a uma mensagem para usar este comando\.'
   unban_success: '`{username}` foi desbanido\.'
   unban_error: 'Falha ao desbanir\. Verifique se tenho as permissões necessárias\.'
   unban_self: 'Não é possível desbanir você mesmo\.'
