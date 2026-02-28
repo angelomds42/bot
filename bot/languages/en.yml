@@ -1,28 +1,31 @@
 # English strings
 common:
-  start: 'Hey\! I am [Ayumu Fujino](https://raw.githubusercontent.com/angelomds42/AyumuFujinoBot/refs/heads/main/bot/assets/banner.png), a modular Telegram bot\.'
-  help: 'Select a module below to see its commands\:'
+  start: "Hi\\. I'm [Fujino](https://raw.githubusercontent.com/angelomds42/AyumuFujinoBot/refs/heads/main/bot/assets/banner.png)\\.\n\nI'm a group management bot with notes and a few other things too\\.\n\nClick the *Help* button below to see all my modules and commands\\."
+  help: |
+    Select a module to see its commands\.
+
+    *Info*\: In the commands below\: `<arg>` is required and `[arg]` is optional\.
   back: "« Back"
-  btn_help: "Help"
+  btn_help: "Help »"
 
 basics:
   help: |
-    Basics\:
+    *Basics*\:
     /start \- Start the bot
     /help \- Show this menu
 
 github:
   help: |
-    GitHub\:
-    /github \<username\> \- Get info about a GitHub user
-  no_args: 'Provide a GitHub username\. Example\: `/github torvalds`'
+    *GitHub*\:
+    /github `<username>` \- Get info about a GitHub user
+  no_args: 'Usage\: `/github <username>`'
   not_found: 'User not found\.'
-  error: 'Failed to fetch user data\.'
-  user_info: "User Info"
+  error: 'Could not reach GitHub\.'
+  user_info: "User Infos"
   name: "Name"
   username: "Username"
   location: "Location"
-  public_repos: "Public Repos"
+  public_repos: "Repos"
   followers: "Followers"
 
 errors:
@@ -30,64 +33,66 @@ errors:
   not_found: 'Not found\.'
 
 moderation:
-  kick_success: 'Kicked `{username}` from the group\.'
-  kick_error: 'Failed to kick\. Make sure I have the right permissions\.'
-  kick_self: 'You cannot kick yourself\.'
-  kick_admin: 'Cannot kick an admin\.'
-  ban_success: '`{username}` has been banned\.'
+  kick_success: '`{username}` was removed\.'
+  kick_error: 'Could not kick\. Check my permissions\.'
+  kick_self: 'You can''t kick yourself\.'
+  kick_admin: 'That''s an admin\.'
+  ban_success: '`{username}` is banned\.'
   ban_duration: 'Duration\: {duration}'
-  ban_error: 'Failed to ban\. Make sure I have the right permissions\.'
-  ban_self: 'You cannot ban yourself\.'
-  ban_admin: 'Cannot ban an admin\.'
-  reply_required: 'You need to reply to a message to use this command\.'
-  unban_success: '`{username}` has been unbanned\.'
-  unban_error: 'Failed to unban\. Make sure I have the right permissions\.'
-  unban_self: 'You cannot unban yourself\.'
-  unban_not_banned: 'This user is not banned\.'
-  mute_success: '`{username}` has been muted\.'
+  ban_error: 'Could not ban\. Check my permissions\.'
+  ban_self: 'You can''t ban yourself\.'
+  ban_admin: 'That''s an admin\.'
+  reply_required: 'Reply to a message to use this command\.'
+  unban_success: '`{username}` is unbanned\.'
+  unban_error: 'Could not unban\. Check my permissions\.'
+  unban_self: 'You can''t unban yourself\.'
+  unban_not_banned: 'That user isn''t banned\.'
+  mute_success: '`{username}` is muted\.'
   mute_duration: 'Duration\: {duration}'
-  mute_error: 'Failed to mute\. Make sure I have the right permissions\.'
-  mute_self: 'You cannot mute yourself\.'
-  mute_admin: 'Cannot mute an admin\.'
-  unmute_success: '`{username}` has been unmuted\.'
-  unmute_error: 'Failed to unmute\. Make sure I have the right permissions\.'
-  unmute_self: 'You cannot unmute yourself\.'
-  unmute_not_muted: 'This user is not muted\.'
-  bot_no_permission: 'I need restrict members permission to do that\.'
+  mute_error: 'Could not mute\. Check my permissions\.'
+  mute_self: 'You can''t mute yourself\.'
+  mute_admin: 'That''s an admin\.'
+  unmute_success: '`{username}` can speak again\.'
+  unmute_error: 'Could not unmute\. Check my permissions\.'
+  unmute_self: 'You can''t unmute yourself\.'
+  unmute_not_muted: 'That user isn''t muted\.'
+  bot_no_permission: 'I need the restrict members permission for that\.'
   no_target: 'Reply to a message, mention a user, or provide a user ID\.'
   restriction_reason: 'Reason\: {reason}'
-  user_not_admin: 'You need to be an admin to use this command\.'
+  user_not_admin: 'Admins only\.'
   help: |
-    Moderation Module\:
-    /kick \<user\> \[reason\] \- Kick a user from the group
-    /ban \<user\> \[duration\] \[reason\] \- Ban a user \(duration: 1m, 2h, 3d\)
-    /unban \<user\> \[reason\] \- Unban a user
-    /mute \<user\> \[duration\] \[reason\] \- Mute a user
-    /unmute \<user\> \- Unmute a user
+    *Moderation*\:
+    /kick `<user>` `[reason]` \- Kick a user
+    /ban `<user>` `[duration]` `[reason]` \- Ban a user \(duration\: 1m, 2h, 3d\)
+    /dban `<reply>` \- Ban and delete the message
+    /unban `<user>` \- Unban a user
+    /mute `<user>` `[duration]` `[reason]` \- Mute a user
+    /unmute `<user>` \- Unmute a user
 
 settings:
-  setlang_usage: 'Usage\: /setlang \<lang\>\. Available\: {langs}'
+  setlang_usage: 'Usage\: /setlang `<lang>`\. Available\: {langs}'
   setlang_success: 'Language set to `{lang}`\.'
   help: |
-    Settings\:
-    /setlang \<lang\> \- Set the group language
+    *Settings*\:
+    /setlang `<lang>` \- Set the group language
 
 notes:
-  save_usage: 'Usage\: /save \<name\> \<content\>'
-  save_success: 'Note `{name}` saved\.'
-  delnote_usage: 'Usage\: /delnote \<name\>'
-  delnote_success: 'Note `{name}` deleted\.'
-  delnote_not_found: 'Note `{name}` not found\.'
-  get_usage: 'Usage\: /get \<number\>'
+  save_usage: 'Usage\: /save `<name>` `<content>` or reply to a message'
+  save_success: '`#{name}` saved\.'
+  save_no_content: 'That message has no text to save\.'
+  delnote_usage: 'Usage\: /delnote `<name>`'
+  delnote_success: '`#{name}` deleted\.'
+  delnote_not_found: 'No note called `#{name}`\.'
+  get_usage: 'Usage\: /get `<number>`'
   not_found_index: 'No note at position `{index}`\.'
-  empty: 'No notes saved in this chat\.'
-  list_header: 'Notes in this chat\:'
-  list_footer: 'Get a note with `#name` or `/get \<number\>`'
-  not_found: 'Note `{name}` not found\.'
-  save_no_content: 'The replied message has no text content\.'
+  not_found: 'No note called `#{name}`\.'
+  empty: 'No notes saved here\.'
+  list_header: 'Notes\:'
   help: |
-    Notes\:
-    /save \<name\> \<content\> \- Save a note
+    *Notes*\:
+    /save `<name>` `<content>` \- Save a note
+    /save `<name>` `(reply)` \- Save a formatted message as a note
     /notes \- List all notes
-    /delnote \<name\> \- Delete a note
-    \#name \- Get a note
+    /get `<number>` \- Get a note by number
+    /delnote `<name>` \- Delete a note
+    \#name \- Get a note by name
