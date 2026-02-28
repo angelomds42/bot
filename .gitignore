@@ -34,3 +34,6 @@ telegrambot/
 # IDEs
 .vscode/
 .idea/
+
+# Database
+bot/data
