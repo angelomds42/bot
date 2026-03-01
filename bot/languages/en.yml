@@ -67,6 +67,17 @@ moderation:
     error: 'Could not unmute\. Check my permissions\.'
     self: 'You can''t unmute yourself\.'
     not_muted: 'That user isn''t muted\.'
+  warn:
+    warned: '`{username}` warned\. `{count}/{limit}`'
+    banned: '`{username}` reached `{count}/{limit}` warns and was banned\.'
+    none: '`{username}` has no warns\.'
+    no_reason: "No reason"
+    list: '`{username}` has `{count}/{limit}` warns\:'
+    reset: 'Warns for `{username}` cleared\.'
+    limit_usage: 'Usage\: /warnlimit `<number>`'
+    limit_set: 'Warn limit set to `{limit}`\.'
+    self: 'You can''t warn yourself\.'
+    admin: 'That''s an admin\.'
   help: |
     *Moderation*\:
     /kick `<user>` `[reason]` \- Kick a user
@@ -75,6 +86,10 @@ moderation:
     /unban `<user>` \- Unban a user
     /mute `<user>` `[duration]` `[reason]` \- Mute a user
     /unmute `<user>` \- Unmute a user
+    /warn `<user>` `[reason]` \- Warn a user
+    /warns `<user>` \- Show warns for a user
+    /resetwarn `<user>` \- Clear warns for a user
+    /warnlimit `<number>` \- Set the warn limit \(default\: 3\)
 
 settings:
   setlang_usage: 'Usage\: /setlang `<lang>`\. Available\: {langs}'
@@ -103,21 +118,3 @@ notes:
     /get `<number>` \- Get a note by number
     /delnote `<name>` \- Delete a note
     \#name \- Get a note by name
-
-warns:
-  warned: '`{username}` warned\. `{count}/{limit}`'
-  banned: '`{username}` reached `{count}/{limit}` warns and was banned\.'
-  none: '`{username}` has no warns\.'
-  no_reason: "No reason"
-  list: '`{username}` has `{count}/{limit}` warns\:'
-  reset: 'Warns for `{username}` cleared\.'
-  limit_usage: 'Usage\: /warnlimit `<number>`'
-  limit_set: 'Warn limit set to `{limit}`\.'
-  self: 'You can''t warn yourself\.'
-  admin: 'That''s an admin\.'
-  help: |
-    *Warns*\:
-    /warn `<user>` `[reason]` \- Warn a user
-    /warns `<user>` \- Show warns for a user
-    /resetwarn `<user>` \- Clear warns for a user
-    /warnlimit `<number>` \- Set the warn limit \(default\: 3\)

@@ -67,6 +67,17 @@ moderation:
     error: 'Não consegui remover o silêncio\. Verifique minhas permissões\.'
     self: 'Você não pode remover seu próprio silêncio\.'
     not_muted: 'Esse usuário não está silenciado\.'
+  warn:
+    warned: '`{username}` advertido\. `{count}/{limit}`'
+    banned: '`{username}` atingiu `{count}/{limit}` advertências e foi banido\.'
+    none: '`{username}` não tem advertências\.'
+    no_reason: "Sem motivo"
+    list: '`{username}` tem `{count}/{limit}` advertências\:'
+    reset: 'Advertências de `{username}` limpas\.'
+    limit_usage: 'Uso\: /warnlimit `<número>`'
+    limit_set: 'Limite de advertências definido para `{limit}`\.'
+    self: 'Você não pode se advertir\.'
+    admin: 'Esse é um admin\.'
   help: |
     *Moderação*\:
     /kick `<usuário>` `[motivo]` \- Remove um usuário
@@ -75,6 +86,10 @@ moderation:
     /unban `<usuário>` \- Desbane um usuário
     /mute `<usuário>` `[duração]` `[motivo]` \- Silencia um usuário
     /unmute `<usuário>` \- Remove o silêncio
+    /warn `<usuário>` `[motivo]` \- Adverte um usuário
+    /warns `<usuário>` \- Mostra advertências de um usuário
+    /resetwarn `<usuário>` \- Limpa advertências de um usuário
+    /warnlimit `<número>` \- Define o limite de advertências \(padrão\: 3\)
 
 settings:
   setlang_usage: 'Uso\: /setlang `<idioma>`\. Disponíveis\: {langs}'
@@ -103,21 +118,3 @@ notes:
     /get `<número>` \- Pega uma nota pelo número
     /delnote `<nome>` \- Deleta uma nota
     \#nome \- Pega uma nota pelo nome
-
-warns:
-  warned: '`{username}` advertido\. `{count}/{limit}`'
-  banned: '`{username}` atingiu `{count}/{limit}` advertências e foi banido\.'
-  none: '`{username}` não tem advertências\.'
-  no_reason: "Sem motivo"
-  list: '`{username}` tem `{count}/{limit}` advertências\:'
-  reset: 'Advertências de `{username}` limpas\.'
-  limit_usage: 'Uso\: /warnlimit `<número>`'
-  limit_set: 'Limite de advertências definido para `{limit}`\.'
-  self: 'Você não pode se advertir\.'
-  admin: 'Esse é um admin\.'
-  help: |
-    *Advertências*\:
-    /warn `<usuário>` `[motivo]` \- Adverte um usuário
-    /warns `<usuário>` \- Mostra advertências de um usuário
-    /resetwarn `<usuário>` \- Limpa advertências de um usuário
-    /warnlimit `<número>` \- Define o limite de advertências \(padrão\: 3\)
