@@ -8,14 +8,21 @@ logger = logging.getLogger(__name__)
 
 
 def load_modules(application):
-    for _, name, _ in pkgutil.iter_modules(modules.__path__, modules.__name__ + "."):
-        try:
-            module = importlib.import_module(name)
-            if hasattr(module, "__init_module__"):
-                module.__init_module__(application)
-                logger.info(f"Loaded: {name}")
-        except Exception as e:
-            logger.exception(f"Error loading {name}: {e}")
+    def _load(package):
+        for _, name, ispkg in pkgutil.iter_modules(
+            package.__path__, package.__name__ + "."
+        ):
+            try:
+                mod = importlib.import_module(name)
+                if ispkg:
+                    _load(mod)
+                elif hasattr(mod, "__init_module__"):
+                    mod.__init_module__(application)
+                    logger.info(f"Loaded: {name}")
+            except Exception as e:
+                logger.exception(f"Error loading {name}: {e}")
+
+    _load(modules)
 
 
 def main():
