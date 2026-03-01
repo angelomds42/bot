@@ -1,6 +1,7 @@
 # English strings
 common:
   start: "Hi\\. I'm [Fujino](https://raw.githubusercontent.com/angelomds42/AyumuFujinoBot/refs/heads/main/bot/assets/banner.png)\\.\n\nI'm a group management bot with notes and a few other things too\\.\n\nClick the *Help* button below to see all my modules and commands\\."
+  start_group: "I'm here\\."
   help: |
     Select a module to see its commands\.
 
@@ -33,33 +34,39 @@ errors:
   not_found: 'Not found\.'
 
 moderation:
-  kick_success: '`{username}` was removed\.'
-  kick_error: 'Could not kick\. Check my permissions\.'
-  kick_self: 'You can''t kick yourself\.'
-  kick_admin: 'That''s an admin\.'
-  ban_success: '`{username}` is banned\.'
-  ban_duration: 'Duration\: {duration}'
-  ban_error: 'Could not ban\. Check my permissions\.'
-  ban_self: 'You can''t ban yourself\.'
-  ban_admin: 'That''s an admin\.'
-  reply_required: 'Reply to a message to use this command\.'
-  unban_success: '`{username}` is unbanned\.'
-  unban_error: 'Could not unban\. Check my permissions\.'
-  unban_self: 'You can''t unban yourself\.'
-  unban_not_banned: 'That user isn''t banned\.'
-  mute_success: '`{username}` is muted\.'
-  mute_duration: 'Duration\: {duration}'
-  mute_error: 'Could not mute\. Check my permissions\.'
-  mute_self: 'You can''t mute yourself\.'
-  mute_admin: 'That''s an admin\.'
-  unmute_success: '`{username}` can speak again\.'
-  unmute_error: 'Could not unmute\. Check my permissions\.'
-  unmute_self: 'You can''t unmute yourself\.'
-  unmute_not_muted: 'That user isn''t muted\.'
-  bot_no_permission: 'I need the restrict members permission for that\.'
-  no_target: 'Reply to a message, mention a user, or provide a user ID\.'
-  restriction_reason: 'Reason\: {reason}'
-  user_not_admin: 'Admins only\.'
+  common:
+    user_not_admin: 'Admins only\.'
+    bot_no_permission: 'I need the restrict members permission for that\.'
+    no_target: 'Reply to a message, mention a user, or provide a user ID\.'
+    reply_required: 'Reply to a message to use this command\.'
+    restriction_reason: 'Reason\: {reason}'
+  ban:
+    success: '`{username}` is banned\.'
+    duration: 'Duration\: {duration}'
+    error: 'Could not ban\. Check my permissions\.'
+    self: 'You can''t ban yourself\.'
+    admin: 'That''s an admin\.'
+    not_banned: 'That user isn''t banned\.'
+  unban:
+    success: '`{username}` is unbanned\.'
+    error: 'Could not unban\. Check my permissions\.'
+    self: 'You can''t unban yourself\.'
+  kick:
+    success: '`{username}` was removed\.'
+    error: 'Could not kick\. Check my permissions\.'
+    self: 'You can''t kick yourself\.'
+    admin: 'That''s an admin\.'
+  mute:
+    success: '`{username}` is muted\.'
+    duration: 'Duration\: {duration}'
+    error: 'Could not mute\. Check my permissions\.'
+    self: 'You can''t mute yourself\.'
+    admin: 'That''s an admin\.'
+  unmute:
+    success: '`{username}` can speak again\.'
+    error: 'Could not unmute\. Check my permissions\.'
+    self: 'You can''t unmute yourself\.'
+    not_muted: 'That user isn''t muted\.'
   help: |
     *Moderation*\:
     /kick `<user>` `[reason]` \- Kick a user
@@ -106,8 +113,8 @@ warns:
   reset: 'Warns for `{username}` cleared\.'
   limit_usage: 'Usage\: /warnlimit `<number>`'
   limit_set: 'Warn limit set to `{limit}`\.'
-  warn_self: 'You can''t warn yourself\.'
-  warn_admin: 'That''s an admin\.'
+  self: 'You can''t warn yourself\.'
+  admin: 'That''s an admin\.'
   help: |
     *Warns*\:
     /warn `<user>` `[reason]` \- Warn a user

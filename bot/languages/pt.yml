@@ -1,6 +1,7 @@
 # Strings em Português
 common:
   start: "Oi\\. Sou [Fujino](https://raw.githubusercontent.com/angelomds42/AyumuFujinoBot/refs/heads/main/bot/assets/banner.png)\\.\n\nSou um bot para moderação de grupos com notas e algumas outras funções\\.\n\nClique no botão *Ajuda* abaixo para ver todos os meus módulos e comandos\\."
+  start_group: "Estou aqui\\."
   help: |
     Selecione um módulo para ver seus comandos\.
 
@@ -18,7 +19,6 @@ github:
   help: |
     *GitHub*\:
     /github `<usuário>` \- Informações sobre um usuário do GitHub
-
   no_args: 'Uso\: `/github <usuário>`'
   not_found: 'Usuário não encontrado\.'
   error: 'Não consegui acessar o GitHub\.'
@@ -34,33 +34,39 @@ errors:
   not_found: 'Não encontrado\.'
 
 moderation:
-  kick_success: '`{username}` foi removido\.'
-  kick_error: 'Não consegui remover\. Verifique minhas permissões\.'
-  kick_self: 'Você não pode se remover\.'
-  kick_admin: 'Esse é um admin\.'
-  ban_success: '`{username}` está banido\.'
-  ban_duration: 'Duração\: {duration}'
-  ban_error: 'Não consegui banir\. Verifique minhas permissões\.'
-  ban_self: 'Você não pode se banir\.'
-  ban_admin: 'Esse é um admin\.'
-  reply_required: 'Responda a uma mensagem para usar este comando\.'
-  unban_success: '`{username}` foi desbanido\.'
-  unban_error: 'Não consegui desbanir\. Verifique minhas permissões\.'
-  unban_self: 'Você não pode se desbanir\.'
-  unban_not_banned: 'Esse usuário não está banido\.'
-  mute_success: '`{username}` está silenciado\.'
-  mute_duration: 'Duração\: {duration}'
-  mute_error: 'Não consegui silenciar\. Verifique minhas permissões\.'
-  mute_self: 'Você não pode se silenciar\.'
-  mute_admin: 'Esse é um admin\.'
-  unmute_success: '`{username}` pode falar de novo\.'
-  unmute_error: 'Não consegui remover o silêncio\. Verifique minhas permissões\.'
-  unmute_self: 'Você não pode remover seu próprio silêncio\.'
-  unmute_not_muted: 'Esse usuário não está silenciado\.'
-  bot_no_permission: 'Preciso da permissão de restringir membros para isso\.'
-  no_target: 'Responda a uma mensagem, mencione um usuário ou forneça um ID\.'
-  restriction_reason: 'Motivo\: {reason}'
-  user_not_admin: 'Só admins\.'
+  common:
+    user_not_admin: 'Só admins\.'
+    bot_no_permission: 'Preciso da permissão de restringir membros para isso\.'
+    no_target: 'Responda a uma mensagem, mencione um usuário ou forneça um ID\.'
+    reply_required: 'Responda a uma mensagem para usar este comando\.'
+    restriction_reason: 'Motivo\: {reason}'
+  ban:
+    success: '`{username}` está banido\.'
+    duration: 'Duração\: {duration}'
+    error: 'Não consegui banir\. Verifique minhas permissões\.'
+    self: 'Você não pode se banir\.'
+    admin: 'Esse é um admin\.'
+    not_banned: 'Esse usuário não está banido\.'
+  unban:
+    success: '`{username}` foi desbanido\.'
+    error: 'Não consegui desbanir\. Verifique minhas permissões\.'
+    self: 'Você não pode se desbanir\.'
+  kick:
+    success: '`{username}` foi removido\.'
+    error: 'Não consegui remover\. Verifique minhas permissões\.'
+    self: 'Você não pode se remover\.'
+    admin: 'Esse é um admin\.'
+  mute:
+    success: '`{username}` está silenciado\.'
+    duration: 'Duração\: {duration}'
+    error: 'Não consegui silenciar\. Verifique minhas permissões\.'
+    self: 'Você não pode se silenciar\.'
+    admin: 'Esse é um admin\.'
+  unmute:
+    success: '`{username}` pode falar de novo\.'
+    error: 'Não consegui remover o silêncio\. Verifique minhas permissões\.'
+    self: 'Você não pode remover seu próprio silêncio\.'
+    not_muted: 'Esse usuário não está silenciado\.'
   help: |
     *Moderação*\:
     /kick `<usuário>` `[motivo]` \- Remove um usuário
@@ -107,8 +113,8 @@ warns:
   reset: 'Advertências de `{username}` limpas\.'
   limit_usage: 'Uso\: /warnlimit `<número>`'
   limit_set: 'Limite de advertências definido para `{limit}`\.'
-  warn_self: 'Você não pode se advertir\.'
-  warn_admin: 'Esse é um admin\.'
+  self: 'Você não pode se advertir\.'
+  admin: 'Esse é um admin\.'
   help: |
     *Advertências*\:
     /warn `<usuário>` `[motivo]` \- Adverte um usuário
