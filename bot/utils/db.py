@@ -39,13 +39,35 @@ def get_db() -> sqlite3.Connection:
             )
         """
         )
+        _conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS warns (
+                id       INTEGER PRIMARY KEY AUTOINCREMENT,
+                chat_id  INTEGER NOT NULL,
+                user_id  INTEGER NOT NULL,
+                reason   TEXT,
+                added_at TEXT DEFAULT CURRENT_TIMESTAMP
+            )
+        """
+        )
+        _conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS warn_settings (
+                chat_id    INTEGER PRIMARY KEY,
+                warn_limit INTEGER NOT NULL DEFAULT 3
+            )
+        """
+        )
         _conn.commit()
 
-        try:
-            _conn.execute("ALTER TABLE notes ADD COLUMN parse_mode TEXT")
-            _conn.commit()
-        except sqlite3.OperationalError:
-            pass
+        for migration in [
+            "ALTER TABLE notes ADD COLUMN parse_mode TEXT",
+        ]:
+            try:
+                _conn.execute(migration)
+                _conn.commit()
+            except sqlite3.OperationalError:
+                pass
 
     return _conn
 
@@ -128,3 +150,60 @@ def list_notes(chat_id: int) -> list[str]:
         .fetchall()
     )
     return [row[0] for row in rows]
+
+
+def add_warn(chat_id: int, user_id: int, reason: str | None = None) -> int:
+    db = get_db()
+    db.execute(
+        "INSERT INTO warns (chat_id, user_id, reason) VALUES (?, ?, ?)",
+        (chat_id, user_id, reason),
+    )
+    db.commit()
+    row = db.execute(
+        "SELECT COUNT(*) FROM warns WHERE chat_id = ? AND user_id = ?",
+        (chat_id, user_id),
+    ).fetchone()
+    return row[0]
+
+
+def get_warns(chat_id: int, user_id: int) -> list[tuple[str | None, str]]:
+    rows = (
+        get_db()
+        .execute(
+            "SELECT reason, added_at FROM warns WHERE chat_id = ? AND user_id = ? ORDER BY added_at",
+            (chat_id, user_id),
+        )
+        .fetchall()
+    )
+    return rows
+
+
+def reset_warns(chat_id: int, user_id: int) -> bool:
+    db = get_db()
+    cursor = db.execute(
+        "DELETE FROM warns WHERE chat_id = ? AND user_id = ?",
+        (chat_id, user_id),
+    )
+    db.commit()
+    return cursor.rowcount > 0
+
+
+def get_warn_limit(chat_id: int) -> int:
+    row = (
+        get_db()
+        .execute("SELECT warn_limit FROM warn_settings WHERE chat_id = ?", (chat_id,))
+        .fetchone()
+    )
+    return row[0] if row else 3
+
+
+def set_warn_limit(chat_id: int, limit: int) -> None:
+    db = get_db()
+    db.execute(
+        """
+        INSERT INTO warn_settings (chat_id, warn_limit) VALUES (?, ?)
+        ON CONFLICT(chat_id) DO UPDATE SET warn_limit = excluded.warn_limit
+        """,
+        (chat_id, limit),
+    )
+    db.commit()

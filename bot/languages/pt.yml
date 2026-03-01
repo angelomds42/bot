@@ -97,3 +97,21 @@ notes:
     /get `<número>` \- Pega uma nota pelo número
     /delnote `<nome>` \- Deleta uma nota
     \#nome \- Pega uma nota pelo nome
+
+warns:
+  warned: '`{username}` advertido\. `{count}/{limit}`'
+  banned: '`{username}` atingiu `{count}/{limit}` advertências e foi banido\.'
+  none: '`{username}` não tem advertências\.'
+  no_reason: "Sem motivo"
+  list: '`{username}` tem `{count}/{limit}` advertências\:'
+  reset: 'Advertências de `{username}` limpas\.'
+  limit_usage: 'Uso\: /warnlimit `<número>`'
+  limit_set: 'Limite de advertências definido para `{limit}`\.'
+  warn_self: 'Você não pode se advertir\.'
+  warn_admin: 'Esse é um admin\.'
+  help: |
+    *Advertências*\:
+    /warn `<usuário>` `[motivo]` \- Adverte um usuário
+    /warns `<usuário>` \- Mostra advertências de um usuário
+    /resetwarn `<usuário>` \- Limpa advertências de um usuário
+    /warnlimit `<número>` \- Define o limite de advertências \(padrão\: 3\)

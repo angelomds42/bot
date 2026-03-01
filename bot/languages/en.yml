@@ -96,3 +96,21 @@ notes:
     /get `<number>` \- Get a note by number
     /delnote `<name>` \- Delete a note
     \#name \- Get a note by name
+
+warns:
+  warned: '`{username}` warned\. `{count}/{limit}`'
+  banned: '`{username}` reached `{count}/{limit}` warns and was banned\.'
+  none: '`{username}` has no warns\.'
+  no_reason: "No reason"
+  list: '`{username}` has `{count}/{limit}` warns\:'
+  reset: 'Warns for `{username}` cleared\.'
+  limit_usage: 'Usage\: /warnlimit `<number>`'
+  limit_set: 'Warn limit set to `{limit}`\.'
+  warn_self: 'You can''t warn yourself\.'
+  warn_admin: 'That''s an admin\.'
+  help: |
+    *Warns*\:
+    /warn `<user>` `[reason]` \- Warn a user
+    /warns `<user>` \- Show warns for a user
+    /resetwarn `<user>` \- Clear warns for a user
+    /warnlimit `<number>` \- Set the warn limit \(default\: 3\)
