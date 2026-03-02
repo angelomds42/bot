@@ -6,6 +6,7 @@ common:
     Selecione um módulo para ver seus comandos\.
 
     *Info*\: Nos comandos abaixo\: `<arg>` é obrigatório e `[arg]` é opcional\.
+  help_pm: Clique no botão abaixo para ver meus comandos\.
   back: "« Voltar"
   btn_help: "Ajuda »"
 

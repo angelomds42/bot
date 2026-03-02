@@ -11,6 +11,12 @@ from bot.utils.message import reply_keyboard, edit
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     s, _ = get_string_helper(update)
+
+    if context.args and context.args[0] == "help":
+        keyboard = InlineKeyboardMarkup(get_help_keyboard(s("common.back")))
+        await reply_keyboard(update, s("common.help"), keyboard)
+        return
+
     keyboard = InlineKeyboardMarkup(
         [[InlineKeyboardButton(s("common.btn_help"), callback_data="help_main")]]
     )
@@ -44,6 +50,22 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     s, _ = get_string_helper(update)
+
+    if update.effective_chat.type != "private":
+        bot_username = (await context.bot.get_me()).username
+        keyboard = InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        s("common.btn_help"),
+                        url=f"https://t.me/{bot_username}?start=help",
+                    )
+                ]
+            ]
+        )
+        await reply_keyboard(update, s("common.help_pm"), keyboard)
+        return
+
     keyboard = InlineKeyboardMarkup(get_help_keyboard(s("common.back")))
     await reply_keyboard(update, s("common.help"), keyboard)
 
