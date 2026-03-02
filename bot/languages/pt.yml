@@ -119,3 +119,8 @@ notes:
     /get `<número>` \- Pega uma nota pelo número
     /delnote `<nome>` \- Deleta uma nota
     \#nome \- Pega uma nota pelo nome
+
+misc:
+  help: |
+    *Misc*\:
+    /ping \- Verifica a latência do bot

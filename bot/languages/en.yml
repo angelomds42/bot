@@ -119,3 +119,9 @@ notes:
     /get `<number>` \- Get a note by number
     /delnote `<name>` \- Delete a note
     \#name \- Get a note by name
+
+
+misc:
+  help: |
+    *Misc*\:
+    /ping \- Check bot latency
