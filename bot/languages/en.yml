@@ -125,3 +125,4 @@ misc:
   help: |
     *Misc*\:
     /ping \- Check bot latency
+    /dice \- Roll a dice
