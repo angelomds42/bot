@@ -6,7 +6,7 @@ from bot.utils.help import (
     get_string_helper,
     register_module_help,
 )
-from bot.utils.message import reply_keyboard, edit
+from bot.utils.message import reply_keyboard, edit_keyboard
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -37,7 +37,7 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await start(update, context)
     elif query.data == "help_main":
         keyboard = InlineKeyboardMarkup(get_help_keyboard(s("common.back")))
-        await edit(update, s("common.help"), keyboard)
+        await edit_keyboard(update, s("common.help"), keyboard)
     elif query.data.startswith("help_mod_"):
         mod_name = query.data.replace("help_mod_", "")
         help_key = get_module_help(mod_name)
@@ -45,7 +45,7 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             keyboard = InlineKeyboardMarkup(
                 [[InlineKeyboardButton(s("common.back"), callback_data="help_main")]]
             )
-            await edit(update, s(help_key), keyboard)
+            await edit_keyboard(update, s(help_key), keyboard)
 
 
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
