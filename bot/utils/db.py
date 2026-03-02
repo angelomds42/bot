@@ -60,6 +60,16 @@ def get_db() -> sqlite3.Connection:
             )
         """
         )
+        _conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS filters (
+                chat_id  INTEGER NOT NULL,
+                keyword  TEXT NOT NULL,
+                response TEXT NOT NULL,
+                PRIMARY KEY (chat_id, keyword)
+            )
+        """
+        )
         _conn.commit()
 
         for migration in [
@@ -218,4 +228,52 @@ def set_warn_limit(chat_id: int, limit: int) -> None:
         """,
         (chat_id, limit),
     )
+    db.commit()
+
+
+def save_filter(chat_id: int, keyword: str, response: str) -> None:
+    db = get_db()
+    db.execute(
+        """
+        INSERT INTO filters (chat_id, keyword, response) VALUES (?, ?, ?)
+        ON CONFLICT(chat_id, keyword) DO UPDATE SET response = excluded.response
+        """,
+        (chat_id, keyword.lower(), response),
+    )
+    db.commit()
+
+
+def delete_filter(chat_id: int, keyword: str) -> bool:
+    db = get_db()
+    cursor = db.execute(
+        "DELETE FROM filters WHERE chat_id = ? AND keyword = ?",
+        (chat_id, keyword.lower()),
+    )
+    db.commit()
+    return cursor.rowcount > 0
+
+
+def list_filters(chat_id: int) -> list[str]:
+    rows = (
+        get_db()
+        .execute(
+            "SELECT keyword FROM filters WHERE chat_id = ? ORDER BY keyword", (chat_id,)
+        )
+        .fetchall()
+    )
+    return [row[0] for row in rows]
+
+
+def get_filters(chat_id: int) -> list[tuple[str, str]]:
+    rows = (
+        get_db()
+        .execute("SELECT keyword, response FROM filters WHERE chat_id = ?", (chat_id,))
+        .fetchall()
+    )
+    return rows
+
+
+def delete_all_filters(chat_id: int) -> None:
+    db = get_db()
+    db.execute("DELETE FROM filters WHERE chat_id = ?", (chat_id,))
     db.commit()

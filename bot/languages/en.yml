@@ -120,9 +120,27 @@ notes:
     /delnote `<name>` \- Delete a note
     \#name \- Get a note by name
 
-
 misc:
   help: |
     *Misc*\:
     /ping \- Check bot latency
     /dice \- Roll a dice
+
+filters:
+  save_usage: 'Usage\: /filter `<keyword>` `<response>` or reply to a message\. Use quotes for multi\-word keywords\: /filter `"hey there"` `response`'
+  save_success: 'Filter `{keyword}` saved\.'
+  remove_usage: 'Usage\: /unfilter `<keyword>`'
+  remove_success: 'Filter `{keyword}` removed\.'
+  remove_all_success: 'All filters removed\.'
+  not_found: 'No filter called `{keyword}`\.'
+  no_content: 'That message has no text to save\.'
+  empty: 'No filters saved here\.'
+  list_header: 'Filters\:'
+  help: |
+    *Filters*\:
+    /filter `<keyword>` `<response>` \- Add a filter
+    /filter `"keyword with spaces"` `<response>` \- Multi\-word keyword
+    /filter `<keyword>` `\(reply\)` \- Add a filter from a message
+    /unfilter `<keyword>` \- Remove a filter
+    /stopall \- Remove all filters
+    /filters \- List all filters

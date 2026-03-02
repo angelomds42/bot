@@ -125,3 +125,22 @@ misc:
     *Misc*\:
     /ping \- Verifica a latência do bot
     /dice \- Rola um dado
+
+filters:
+  save_usage: 'Uso\: /filter `<keyword>` `<resposta>` ou responda a uma mensagem\. Use aspas para keywords com espaços\: /filter `"bom dia"` `resposta`'
+  save_success: 'Filtro `{keyword}` salvo\.'
+  remove_usage: 'Uso\: /unfilter `<keyword>`'
+  remove_success: 'Filtro `{keyword}` removido\.'
+  remove_all_success: 'Todos os filtros removidos\.'
+  not_found: 'Nenhum filtro chamado `{keyword}`\.'
+  no_content: 'Essa mensagem não tem texto para salvar\.'
+  empty: 'Nenhum filtro salvo aqui\.'
+  list_header: 'Filtros\:'
+  help: |
+    *Filtros*\:
+    /filter `<keyword>` `<resposta>` \- Adiciona um filtro
+    /filter `"keyword com espaços"` `<resposta>` \- Keyword com espaços
+    /filter `<keyword>` `\(reply\)` \- Adiciona um filtro de uma mensagem
+    /unfilter `<keyword>` \- Remove um filtro
+    /stopall \- Remove todos os filtros
+    /filters \- Lista todos os filtros
