@@ -79,6 +79,7 @@ moderation:
       still here, just quiet\.
 
       /mute `<usr>` `[time]` `[reason]` \- mute a user
+      /dmute `<usr>` \- mute a user and delete their message
       /unmute `<usr>` \- unmute a user
 
       `<usr>` — @mention, reply or user ID

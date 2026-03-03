@@ -6,8 +6,13 @@ from bot.utils.message import reply
 from bot.modules.moderation.common import check_common, get_member, _parse_args
 
 
-async def _mute_common(update, context, action, restrict=True):
+async def _mute_common(
+    update, context, action, restrict=True, delete_message=False, force_reply=False
+):
     s, e = get_string_helper(update)
+
+    if force_reply and not update.message.reply_to_message:
+        return await reply(update, s("moderation.common.reply_required"))
 
     user_id, display_name, ok = await check_common(update, context, s, action)
     if not ok:
@@ -23,6 +28,9 @@ async def _mute_common(update, context, action, restrict=True):
     reason = " ".join(context.args[arg_offset:]) if context.args else None
 
     try:
+        if delete_message and update.message.reply_to_message:
+            await update.message.reply_to_message.delete()
+
         allow = not restrict
         await update.effective_chat.restrict_member(
             user_id,
@@ -54,6 +62,13 @@ async def unmute(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await _mute_common(update, context, "unmute", restrict=False)
 
 
+async def dmute(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await _mute_common(
+        update, context, "mute", restrict=True, delete_message=True, force_reply=True
+    )
+
+
 def __init_module__(application):
     application.add_handler(CommandHandler("mute", mute))
     application.add_handler(CommandHandler("unmute", unmute))
+    application.add_handler(CommandHandler("dmute", dmute))

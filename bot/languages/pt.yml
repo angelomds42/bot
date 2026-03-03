@@ -79,6 +79,7 @@ moderation:
       ainda aqui, só quieto\.
 
       /mute `<usr>` `[tempo]` `[motivo]` \- silencia um usuário
+      /dmute `<usr>` \- silencia um usuário e apaga a mensagem
       /unmute `<usr>` \- remove o silêncio
 
       `<usr>` — @menção, reply ou user ID
