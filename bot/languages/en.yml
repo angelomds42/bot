@@ -12,13 +12,13 @@ common:
 
 basics:
   help: |
-    *basics*\:
+    *basics:*\:
     /start \- start me up
     /help \- show this menu
 
 github:
   help: |
-    *github*\:
+    *github*:\:
     /github `<username>` \- look up a github user
   no_args: 'usage\: `/github <username>`'
   not_found: "don't know them\\."
@@ -49,7 +49,7 @@ moderation:
     admin: "they're an admin\\. i can't touch them\\."
     not_banned: "they're not banned\\."
     help: |
-      *bans*
+      *bans*\:
       the nuclear options\.
 
       /ban `<usr>` `[time]` `[reason]` \- ban a user
@@ -75,7 +75,7 @@ moderation:
     self: "if you want to stop talking, just stop talking\\."
     admin: "they're an admin\\. i can't touch them\\."
     help: |
-      *mutes*
+      *mutes*\:
       still here, just quiet\.
 
       /mute `<usr>` `[time]` `[reason]` \- mute a user
@@ -100,7 +100,7 @@ moderation:
     self: "you can't warn yourself\\."
     admin: "they're an admin\\. i can't touch them\\."
     help: |
-      *warns*
+      *warns*\:
       three strikes and you're out\. or however many you set\.
 
       /warn `<usr>` `[reason]` \- warn a user
@@ -116,7 +116,7 @@ settings:
   setlang_usage: 'usage\: /setlang `<lang>`\. available\: {langs}'
   setlang_success: 'alright, `{lang}` it is\.'
   help: |
-    *settings*
+    *settings*\:
     tweak how i behave in this group\.
 
     /setlang `<lang>` \- change the group language
@@ -136,7 +136,7 @@ notes:
   empty: 'no notes saved here yet\.'
   list_header: 'notes\:'
   help: |
-    *notes*
+    *notes*\:
     save things\. get them back later\.
 
     /save `<n>` `<text>` \- save a note
@@ -166,7 +166,7 @@ filters:
   empty: 'no filters set here yet\.'
   list_header: 'active filters\:'
   help: |
-    *filters*
+    *filters*\:
     i reply so you don't have to\.
 
     /filter `<key>` `<msg>` \- add a filter

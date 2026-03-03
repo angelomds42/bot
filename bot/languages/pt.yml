@@ -49,7 +49,7 @@ moderation:
     admin: 'esse é admin\. não posso fazer nada\.'
     not_banned: 'ele nem está banido\.'
     help: |
-      *bans*
+      *bans*\:
       as opções nucleares\.
 
       /ban `<usr>` `[tempo]` `[motivo]` \- bane um usuário
@@ -75,7 +75,7 @@ moderation:
     self: 'se quiser parar de falar\, é só parar\.'
     admin: 'esse é admin\. não posso fazer nada\.'
     help: |
-      *silêncio*
+      *silêncio*\:
       ainda aqui, só quieto\.
 
       /mute `<usr>` `[tempo]` `[motivo]` \- silencia um usuário
@@ -100,7 +100,7 @@ moderation:
     self: 'você não pode se advertir\.'
     admin: 'esse é admin\. não posso fazer nada\.'
     help: |
-      *advertências*
+      *advertências*\:
       três chances e acabou\. ou quantas você definir\.
 
       /warn `<usr>` `[motivo]` \- adverte um usuário
@@ -116,7 +116,7 @@ settings:
   setlang_usage: 'uso\: /setlang `<idioma>`\. disponíveis\: {langs}'
   setlang_success: 'certo\, `{lang}` então\.'
   help: |
-    *configurações*
+    *configurações*\:
     ajuste como me comporto neste grupo\.
 
     /setlang `<idioma>` \- muda o idioma do grupo
@@ -136,7 +136,7 @@ notes:
   empty: 'nenhuma nota salva aqui ainda\.'
   list_header: 'notas\:'
   help: |
-    *notas*
+    *notas*\:
     salva coisas\. recupera depois\.
 
     /save `<n>` `<texto>` \- salva uma nota
@@ -166,7 +166,7 @@ filters:
   empty: 'nenhum filtro definido aqui ainda\.'
   list_header: 'filtros ativos\:'
   help: |
-    *filtros*
+    *filtros*\:
     eu respondo pra você não precisar\.
 
     /filter `<key>` `<msg>` \- adiciona um filtro
